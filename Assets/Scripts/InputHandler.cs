@@ -22,7 +22,11 @@ public class InputHandler : MonoBehaviour
         {
             GameState.State.SetJumpState(true);
         }
-        if(!Input.anyKey)
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            GameState.State.SetRollingState(true);
+        }
+        if (!Input.anyKey)
         {
             GameState.State.SetIdleState(true);
         }

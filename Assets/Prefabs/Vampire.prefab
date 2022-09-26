@@ -3505,4 +3505,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2520147604150159010}
-  rigidbody: {fileID: 0}

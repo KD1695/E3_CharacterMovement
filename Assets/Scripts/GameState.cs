@@ -6,12 +6,13 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static GameState State; 
-    bool iswalking = false, isRunning = false, isJumping = false, isSpinning = false;
+    bool iswalking = false, isRunning = false, isJumping = false, isRolling = false;
 
     public event Action setIdleState;
     public event Action setWalkingState;
     public event Action setJumpingState;
     public event Action setRunningState;
+    public event Action setRollingState;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class GameState : MonoBehaviour
         {
             isJumping = _isJumping;
             iswalking = false;
+            isRunning = false;
             setJumpingState();
         }
         else if(!_isJumping)
@@ -58,8 +60,18 @@ public class GameState : MonoBehaviour
         }
     }
 
-    public void SetSpinState()
+    public void SetRollingState(bool _isRolling)
     {
-
+        if (!isRolling && _isRolling)
+        {
+            isRolling = _isRolling;
+            iswalking = false;
+            isRunning = false;
+            setRollingState();
+        }
+        else if (!_isRolling)
+        {
+            isRolling = false;
+        }
     }
 }
