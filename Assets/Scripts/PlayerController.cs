@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator animator;
 
     bool isJumping = false;
+    float lookSpeed = 5.0f;
 
     void Start()
     {
@@ -14,6 +15,13 @@ public class PlayerController : MonoBehaviour
         GameState.State.setWalkingState += OnPlayerWalking;
         GameState.State.setJumpingState += OnPlayerJumping;
         GameState.State.setRunningState += OnPlayerRunning;
+    }
+
+    private void Update()
+    {
+        float mouseInput = Input.GetAxis("Mouse Y");
+        Vector3 lookhere = new Vector3(0, mouseInput * lookSpeed, 0);
+        transform.Rotate(lookhere);
     }
 
     private void LateUpdate()
