@@ -15,7 +15,11 @@ public class InputHandler : MonoBehaviour
         {
             GameState.State.SetWalkState(true);
         }
-        else
+        if (Input.GetKey(KeyCode.Space))
+        {
+            GameState.State.SetJumpState(true);
+        }
+        if(!Input.anyKey)
         {
             GameState.State.SetIdleState(true);
         }
