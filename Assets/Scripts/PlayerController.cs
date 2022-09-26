@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
         GameState.State.setIdleState += OnIdleState;
         GameState.State.setWalkingState += OnPlayerWalking;
         GameState.State.setJumpingState += OnPlayerJumping;
+        GameState.State.setRunningState += OnPlayerRunning;
     }
 
     private void LateUpdate()
@@ -47,5 +48,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isWalking", false);
         animator.SetBool("isJumping", true);
         isJumping = true;
+    }
+
+    void OnPlayerRunning()
+    {
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isWalking", true);
+        animator.SetBool("isRunning", true);
     }
 }

@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour
     public event Action setIdleState;
     public event Action setWalkingState;
     public event Action setJumpingState;
+    public event Action setRunningState;
 
     private void Awake()
     {
@@ -26,9 +27,10 @@ public class GameState : MonoBehaviour
 
     public void SetWalkState(bool _isWalking)
     {
-        if(!iswalking && _isWalking)
+        if((!iswalking && _isWalking) || isRunning)
         {
             iswalking = _isWalking;
+            isRunning = false;
             setWalkingState();
         }
     }
@@ -47,14 +49,13 @@ public class GameState : MonoBehaviour
         }
     }
 
-    public void SetRunningState()
+    public void SetRunningState(bool _isRunning)
     {
-
-    }
-
-    public void SetJumpState()
-    {
-
+        if (!isRunning && _isRunning)
+        {
+            isRunning = _isRunning;
+            setRunningState();
+        }
     }
 
     public void SetSpinState()

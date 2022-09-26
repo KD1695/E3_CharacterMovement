@@ -13,7 +13,10 @@ public class InputHandler : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.W))
         {
-            GameState.State.SetWalkState(true);
+            if (Input.GetKey(KeyCode.LeftShift))
+                GameState.State.SetRunningState(true);
+            else
+                GameState.State.SetWalkState(true);
         }
         if (Input.GetKey(KeyCode.Space))
         {
