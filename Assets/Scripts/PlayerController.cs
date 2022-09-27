@@ -5,10 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] Rigidbody rigidbody;
+    [SerializeField] CapsuleCollider collider;
+    [SerializeField] Transform bonesRoot;
 
     bool isJumping = false;
     bool isRolling = false;
     float lookSpeed = 5.0f;
+
+    float oldBoneHeight;
+
+    private void Awake()
+    {
+        oldBoneHeight = bonesRoot.transform.position.y;
+    }
 
     void Start()
     {
@@ -17,10 +27,14 @@ public class PlayerController : MonoBehaviour
         GameState.State.setJumpingState += OnPlayerJumping;
         GameState.State.setRunningState += OnPlayerRunning;
         GameState.State.setRollingState += OnPlayerRolling;
+        GameState.State.setAttackingState += OnPlayerAttack;
     }
 
     private void Update()
     {
+        float diff = bonesRoot.transform.position.y - oldBoneHeight;
+        oldBoneHeight = bonesRoot.transform.position.y;
+        collider.center = new Vector3(0, collider.center.y+diff, 0);
         float mouseInput = Input.GetAxis("Mouse Y");
         Vector3 lookhere = new Vector3(0, mouseInput * lookSpeed, 0);
         transform.Rotate(lookhere);
@@ -52,6 +66,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isJumping", false);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRolling", false);
+        animator.SetBool("isAttacking", false);
     }
 
     void OnPlayerWalking()
@@ -59,6 +74,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isRunning", false);
         animator.SetBool("isJumping", false);
         animator.SetBool("isRolling", false);
+        animator.SetBool("isAttacking", false);
         animator.SetBool("isWalking", true);
     }
 
@@ -67,6 +83,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isRunning", false);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRolling", false);
+        animator.SetBool("isAttacking", false);
         animator.SetBool("isJumping", true);
         isJumping = true;
     }
@@ -76,6 +93,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isRunning", false);
         animator.SetBool("isWalking", false);
         animator.SetBool("isJumping", false);
+        animator.SetBool("isAttacking", false);
         animator.SetBool("isRolling", true);
         isRolling = true;
     }
@@ -84,7 +102,17 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isJumping", false);
         animator.SetBool("isRolling", false);
+        animator.SetBool("isAttacking", false);
         animator.SetBool("isWalking", true);
         animator.SetBool("isRunning", true);
+    }
+
+    void OnPlayerAttack()
+    {
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isRolling", false);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isAttacking", true);
     }
 }

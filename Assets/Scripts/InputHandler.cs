@@ -26,6 +26,10 @@ public class InputHandler : MonoBehaviour
         {
             GameState.State.SetRollingState(true);
         }
+        if(Input.GetKey(KeyCode.Mouse0))
+        {
+            GameState.State.SetAttackState(true);
+        }
         if (!Input.anyKey)
         {
             GameState.State.SetIdleState(true);
