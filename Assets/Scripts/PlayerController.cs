@@ -115,4 +115,14 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttacking", true);
     }
+
+    void OnDestroy()
+    {
+        GameState.State.setIdleState -= OnIdleState;
+        GameState.State.setWalkingState -= OnPlayerWalking;
+        GameState.State.setJumpingState -= OnPlayerJumping;
+        GameState.State.setRunningState -= OnPlayerRunning;
+        GameState.State.setRollingState -= OnPlayerRolling;
+        GameState.State.setAttackingState -= OnPlayerAttack;
+    }
 }
