@@ -6,14 +6,12 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static GameState State; 
-    bool iswalking = false, isRunning = false, isJumping = false, isRolling = false, isAttacking = false;
+    bool iswalking = false, isRunning = false, isJumping = false;
 
     public event Action setIdleState;
     public event Action setWalkingState;
     public event Action setJumpingState;
     public event Action setRunningState;
-    public event Action setRollingState;
-    public event Action setAttackingState;
 
     private void Awake()
     {
@@ -22,7 +20,6 @@ public class GameState : MonoBehaviour
 
     public void SetIdleState(bool _idleState)
     {
-        isAttacking = false;
         iswalking = false;
         isJumping = false;
         setIdleState();
@@ -34,7 +31,6 @@ public class GameState : MonoBehaviour
         {
             iswalking = _isWalking;
             isRunning = false;
-            isAttacking = false;
             setWalkingState();
         }
     }
@@ -46,7 +42,6 @@ public class GameState : MonoBehaviour
             isJumping = _isJumping;
             iswalking = false;
             isRunning = false;
-            isAttacking = false;
             setJumpingState();
         }
         else if(!_isJumping)
@@ -61,37 +56,6 @@ public class GameState : MonoBehaviour
         {
             isRunning = _isRunning;
             setRunningState();
-        }
-    }
-
-    public void SetRollingState(bool _isRolling)
-    {
-        if (!isRolling && _isRolling)
-        {
-            isRolling = _isRolling;
-            iswalking = false;
-            isRunning = false;
-            isAttacking = false;
-            setRollingState();
-        }
-        else if (!_isRolling)
-        {
-            isRolling = false;
-        }
-    }
-
-    public void SetAttackState(bool _isAttacking)
-    {
-        if (!isAttacking && _isAttacking)
-        {
-            isAttacking = _isAttacking;
-            iswalking = false;
-            isRunning = false;
-            setAttackingState();
-        }
-        else if (!_isAttacking)
-        {
-            isAttacking = false;
         }
     }
 }

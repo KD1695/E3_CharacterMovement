@@ -22,14 +22,6 @@ public class InputHandler : MonoBehaviour
         {
             GameState.State.SetJumpState(true);
         }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            GameState.State.SetRollingState(true);
-        }
-        if(Input.GetKey(KeyCode.Mouse0))
-        {
-            GameState.State.SetAttackState(true);
-        }
         if (!Input.anyKey)
         {
             GameState.State.SetIdleState(true);

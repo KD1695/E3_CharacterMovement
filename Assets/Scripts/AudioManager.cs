@@ -6,7 +6,6 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip attackClip;
     [SerializeField] AudioClip jumpClip;
     [SerializeField] AudioClip footstepsWalkClip;
     [SerializeField] AudioClip footstepsRunClip;
@@ -19,8 +18,6 @@ public class AudioManager : MonoBehaviour
         GameState.State.setWalkingState += OnPlayerWalking;
         GameState.State.setJumpingState += OnPlayerJumping;
         GameState.State.setRunningState += OnPlayerRunning;
-        GameState.State.setRollingState += OnPlayerRolling;
-        GameState.State.setAttackingState += OnPlayerAttack;
     }
 
     private void Update()
@@ -34,20 +31,6 @@ public class AudioManager : MonoBehaviour
                 audioSource.loop = false;
             }
         }
-    }
-
-    private void OnPlayerAttack()
-    {
-        audioSource.clip = attackClip;
-        audioSource.loop = false;
-        audioSource.Play();
-    }
-
-    private void OnPlayerRolling()
-    {
-        audioSource.clip = attackClip;
-        audioSource.loop = false;
-        audioSource.Play();
     }
 
     private void OnPlayerRunning()
