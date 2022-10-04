@@ -35,9 +35,16 @@ public class PlayerController : MonoBehaviour
         float diff = bonesRoot.transform.position.y - oldBoneHeight;
         oldBoneHeight = bonesRoot.transform.position.y;
         collider.center = new Vector3(0, collider.center.y+diff, 0);
-        float mouseInput = Input.GetAxis("Mouse Y");
-        Vector3 lookhere = new Vector3(0, mouseInput * lookSpeed, 0);
-        transform.Rotate(lookhere);
+        if(Input.GetKey(KeyCode.A))
+        {
+            Vector3 lookhere = new Vector3(0, -0.1f * lookSpeed, 0);
+            transform.Rotate(lookhere);
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            Vector3 lookhere = new Vector3(0, 0.1f * lookSpeed, 0);
+            transform.Rotate(lookhere);
+        }
     }
 
     private void LateUpdate()
