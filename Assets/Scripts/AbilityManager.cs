@@ -15,7 +15,7 @@ public class AbilityManager : MonoBehaviour
 
     void Update()
     {
-        if (lastExecutedAnimation != string.Empty && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (lastExecutedAnimation != string.Empty && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
         {
             animator.SetBool(lastExecutedAnimation, false);
             lastExecutedAnimation = string.Empty;
